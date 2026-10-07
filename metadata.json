@@ -1,0 +1,6 @@
+{
+  "name": "Komorebi: Japanese Learning System",
+  "description": "Comprehensive Japanese language learning system featuring interactive Kana & Kanji stroke trainers, JLPT N5–N3 vocabulary & grammar drills, spaced repetition flashcards, and native audio pronunciation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
