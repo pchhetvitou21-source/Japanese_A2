@@ -10,6 +10,7 @@ import { FillInTheBlankDrill } from './components/FillInTheBlankDrill';
 import { SentenceReorderDrill } from './components/SentenceReorderDrill';
 import { MultipleChoiceDrill } from './components/MultipleChoiceDrill';
 import { LessonFlashcardDrill } from './components/LessonFlashcardDrill';
+import { KanjiWordFeature } from './components/KanjiWordFeature';
 import { LessonNavigator } from './components/LessonNavigator';
 import { playChime, playJapaneseSpeech } from './utils/audio';
 import { 
@@ -24,10 +25,11 @@ import {
   ChevronRight, 
   Menu,
   CheckCircle2,
-  Sparkles
+  Sparkles,
+  Bookmark
 } from 'lucide-react';
 
-export type LessonStudyMode = 'dialogue' | 'fill-blank' | 'reorder' | 'quiz' | 'flashcards';
+export type LessonStudyMode = 'dialogue' | 'fill-blank' | 'reorder' | 'quiz' | 'flashcards' | 'kanji';
 
 export default function App() {
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
@@ -55,6 +57,7 @@ export default function App() {
 
   const studyModes: { id: LessonStudyMode; label: string; icon: React.ReactNode; desc: string }[] = [
     { id: 'dialogue', label: 'Lesson Review', icon: <BookOpen className="w-4 h-4" />, desc: 'Can-do Dialogues & Boxed Words' },
+    { id: 'kanji', label: 'Kanji Words (漢字)', icon: <Bookmark className="w-4 h-4" />, desc: 'Learn Kanji with Kana & Romaji' },
     { id: 'fill-blank', label: 'Word Box (Fill Blank)', icon: <CheckCircle2 className="w-4 h-4" />, desc: 'Choose Word from the Box' },
     { id: 'reorder', label: 'Sentence Reordering', icon: <Shuffle className="w-4 h-4" />, desc: 'Unscramble Phrases' },
     { id: 'quiz', label: 'Can-Do Quiz', icon: <HelpCircle className="w-4 h-4" />, desc: 'Multiple Choice Scenarios' },
@@ -239,6 +242,15 @@ export default function App() {
             {studyMode === 'dialogue' && (
               <LessonDialogueView
                 lesson={currentLesson}
+                speechRate={speechRate}
+                showRomaji={showRomaji}
+                showTranslation={showTranslation}
+              />
+            )}
+
+            {studyMode === 'kanji' && (
+              <KanjiWordFeature
+                currentLessonNumber={currentLesson.lessonNumber}
                 speechRate={speechRate}
                 showRomaji={showRomaji}
                 showTranslation={showTranslation}
